@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Malaika ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Arial,sans-serif; color:#fff;
+  min-height:100vh; overflow-x:hidden;
+  background:radial-gradient(circle at top,#6d214f,#180c25 55%,#090612);
+}
+.wrap{max-width:720px;margin:auto;padding:28px 18px 60px;text-align:center}
+.card{
+  background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.18);
+  border-radius:28px; padding:28px 20px; margin:18px 0;
+  box-shadow:0 15px 50px rgba(0,0,0,.35); backdrop-filter:blur(10px)
+}
+h1{font-size:42px;margin:12px 0}
+h2{font-size:27px;margin:8px 0 18px}
+p{font-size:17px;line-height:1.65}
+button{
+  border:0;border-radius:999px;padding:15px 24px;font-size:17px;
+  font-weight:700;cursor:pointer;background:#fff;color:#6d214f;
+  box-shadow:0 8px 25px rgba(0,0,0,.25)
+}
+.small{opacity:.8;font-size:14px}
+.videoBox video{width:100%;border-radius:20px;display:block;background:#000}
+.qr{
+  background:#fff;display:inline-flex;padding:14px;border-radius:18px;
+  margin:10px auto
+}
+.qr img{width:220px;height:220px;display:block}
+.hidden{display:none}
+.heart{font-size:54px;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+#countdown{font-size:25px;font-weight:bold;margin:15px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Hey Malaika… ❤️</h1>
+    <p>A little surprise made specially for you.</p>
+    <h2>18 October 🎂✨</h2>
+    <button onclick="showSurprise()">Start Your Surprise ✨</button>
+  </div>
+
+  <div class="card">
+    <h2>🎂 Malaika's Birthday</h2>
+    <p>The most special day of the year is coming...</p>
+    <div id="countdown">18 October 🎂</div>
+  </div>
+
+  <div class="card">
+    <h2>For You, Malaika 💌</h2>
+    <p>
+      Malaika, ❤️<br><br>
+      Aaj ka din sirf ek birthday nahi hai... ye us insan ka special day hai
+      jo mere liye bohot special hai. 🫂<br><br>
+      Main chahta hoon ke aap hamesha khush rahen, hamesha smile karti rahen
+      aur aapki har achi wish poori ho. ✨<br><br>
+      Aapki smile waise hi bohot pyari hai, isliye aaj ke din sabse zyada
+      smile karna. 🤍<br><br>
+      Happy Birthday, Malaika. 🎂❤️
+    </p>
+  </div>
+
+  <div id="surprise" class="card hidden">
+    <h2>🎥 Your Video Surprise</h2>
+    <p>Ye video sirf aapke liye hai, Malaika ❤️</p>
+    <div class="videoBox">
+      <video id="birthdayVideo" controls playsinline preload="metadata">
+        <source src="birthday-video.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+    <p class="small">Apni video ka naam exactly <b>birthday-video.mp4</b> rakh kar
+    isi folder mein upload karna.</p>
+  </div>
+
+  <div class="card">
+    <h2>📱 Scan Your Surprise QR</h2>
+    <p class="small">Is QR ko scan karne par ye birthday website open hogi.</p>
+    <div class="qr">
+      <img id="qrImage" alt="Birthday website QR code">
+    </div>
+    <p id="qrNote" class="small"></p>
+  </div>
+
+  <div class="card">
+    <h2>One Last Surprise 👀</h2>
+    <p>Malaika, ye poora surprise sirf aapke liye hai. ❤️</p>
+  </div>
+
+</div>
+
+<script>
+// Show the video surprise
+function showSurprise(){
+  const box=document.getElementById("surprise");
+  box.classList.remove("hidden");
+  box.scrollIntoView({behavior:"smooth"});
+}
+
+// Birthday countdown — next 18 October
+function updateCountdown(){
+  const now=new Date();
+  let year=now.getFullYear();
+  let target=new Date(year,9,18,0,0,0);
+  if(target<=now) target=new Date(year+1,9,18,0,0,0);
+  const ms=target-now;
+  const d=Math.floor(ms/86400000);
+  const h=Math.floor(ms/3600000)%24;
+  const m=Math.floor(ms/60000)%60;
+  const s=Math.floor(ms/1000)%60;
+  document.getElementById("countdown").textContent =
+    `${d} Days • ${h} Hours • ${m} Minutes • ${s} Seconds`;
+}
+setInterval(updateCountdown,1000); updateCountdown();
+
+// QR automatically uses the public URL of this page.
+// After hosting, refresh the page once and the QR will point to that URL.
+const pageUrl=window.location.href;
+const qr=document.getElementById("qrImage");
+qr.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(pageUrl);
+document.getElementById("qrNote").textContent =
+  pageUrl.startsWith("http") ? "QR ready for this website link." :
+  "Host this website first; then open the public link to generate the final QR.";
+</script>
+</body>
+</html>
